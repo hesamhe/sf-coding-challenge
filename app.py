@@ -2,21 +2,21 @@ import requests
 from flask import Flask, render_template
 app = Flask(__name__)
 
-
+# Get number of pages
 def get_total_pages():
     url = "https://reqres.in/api/users"
     response = requests.get(url)
     total_pages = response.json()["total_pages"]
     return total_pages
 
-
+# Get all users
 def get_user_list(page):
     url = "https://reqres.in/api/users?page=" + str(page)
     response = requests.get(url)
     data = response.json()["data"]
     return data
 
-
+# Render home page
 @app.route('/')
 def home():
     total_pages = get_total_pages()
@@ -28,6 +28,6 @@ def home():
     return render_template('home.html', title='User List',
                            users=users)
 
-
+# Run app
 if __name__ == "__main__":
     app.run()

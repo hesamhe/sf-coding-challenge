@@ -3,7 +3,7 @@ from app import get_user_list
 import unittest
 from unittest import mock
 
-
+# Mock requests.get() to return a mock response object
 def mocked_requests_get(*args):
     class MockResponse:
         def __init__(self, json_data):
@@ -49,7 +49,7 @@ def mocked_requests_get(*args):
 
     return MockResponse(None, 404)
 
-
+# Test get_user_list() function
 class TotalPagesTestCase(unittest.TestCase):
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
@@ -57,7 +57,7 @@ class TotalPagesTestCase(unittest.TestCase):
 
         self.assertEqual(get_total_pages(), 2)
 
-
+# Test total_pages() function
 class UserListTestCase(unittest.TestCase):
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
@@ -70,6 +70,6 @@ class UserListTestCase(unittest.TestCase):
                            "last_name": "Bluth",
                            "avatar": "https://reqres.in/img/faces/1-image.jpg"}])
 
-
+# Run tests
 if __name__ == '__main__':
     unittest.main()
