@@ -61,7 +61,7 @@ class TotalPagesTestCase(unittest.TestCase):
 class UserListTestCase(unittest.TestCase):
 
     @mock.patch('requests.get', side_effect=mocked_requests_get)
-    def test_total_pages(self, mock_get):
+    def test_user_list(self, mock_get):
 
         self.assertEqual(get_user_list(1),
                          [{"id": 1,
